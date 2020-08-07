@@ -2,9 +2,11 @@ const ARRAY_BARS = document.getElementById("array-bars-container");
 const ARRAY_SIZE = document.getElementById("array-size");
 const NEW_ARRAY = document.getElementById("new-array");
 const ALGORITHM = document.getElementById("algorithm");
+const SORT = document.getElementById("sort");
 
 NEW_ARRAY.addEventListener("click", newArray);
 ARRAY_SIZE.addEventListener("input", adjustArraySize);
+SORT.addEventListener("click", beginSorting);
 
 let COPY_ARRAY_BARS = [];
 
@@ -15,7 +17,7 @@ function adjustArraySize(e) {
 
 	clear();
 
-	for (let i = 1; i <= arraySize.value; i++) {
+	for (let i = 0; i < arraySize.value; i++) {
 		let arrayBar = ARRAY_BARS.appendChild(document.createElement("div"));
 
 		arrayBar.classList.add("array-bar");
@@ -28,17 +30,9 @@ function adjustArraySize(e) {
 	}
 }
 
-function start() {
-	for (let i = 1; i <= ARRAY_SIZE.value; i++) {
-		let arrayBar = ARRAY_BARS.appendChild(document.createElement("div"));
-
-		arrayBar.classList.add("array-bar");
-
-		randomBarHeight = Math.floor(Math.random() * (500 - 5 + 1)) + 5;
-
-		arrayBar.style.height = randomBarHeight.toString() + "px";
-
-		COPY_ARRAY_BARS.push(randomBarHeight);
+function beginSorting() {
+	if (ALGORITHM.value === "Selection Sort") {
+		selectionSort(COPY_ARRAY_BARS);
 	}
 }
 
@@ -50,10 +44,52 @@ function clear() {
 	}
 }
 
-function newArray(e) {
+function newArray() {
 	clear();
 
 	for (let i = 1; i <= ARRAY_SIZE.value; i++) {
+		let arrayBar = ARRAY_BARS.appendChild(document.createElement("div"));
+
+		arrayBar.classList.add("array-bar");
+
+		randomBarHeight = Math.floor(Math.random() * (500 - 5 + 1)) + 5;
+
+		arrayBar.style.height = randomBarHeight.toString() + "px";
+
+		COPY_ARRAY_BARS.push(randomBarHeight);
+	}
+}
+
+const selectionSort = (array) => {
+	for (let i = 0; i < array.length - 1; i++) {
+		let minElementIndex = i;
+
+		ARRAY_BARS.childNodes[i].style.backgroundColor = "blue";
+
+		for (let j = i + 1; j < array.length; j++) {
+			if (array[j] < array[minElementIndex]) {
+				minElementIndex = j;
+
+				ARRAY_BARS.childNodes[j].style.backgroundColor = "green";
+			} else {
+				ARRAY_BARS.childNodes[j].style.backgroundColor = "red";
+			}
+
+			ARRAY_BARS.childNodes[j].style.backgroundColor = "black";
+		}
+
+		let temp = array[i];
+		array[i] = array[minElementIndex];
+		ARRAY_BARS.childNodes[i].style.height = array[minElementIndex].toString() + "px";
+		array[minElementIndex] = temp;
+		ARRAY_BARS.childNodes[minElementIndex].style.height = temp.toString() + "px";
+
+		ARRAY_BARS.childNodes[i].style.backgroundColor = "black";
+	}
+};
+
+function start() {
+	for (let i = 0; i < ARRAY_SIZE.value; i++) {
 		let arrayBar = ARRAY_BARS.appendChild(document.createElement("div"));
 
 		arrayBar.classList.add("array-bar");
