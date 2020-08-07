@@ -1,6 +1,7 @@
 const ARRAY_BARS = document.getElementById("array-bars-container");
 const ARRAY_SIZE = document.getElementById("array-size");
 const NEW_ARRAY = document.getElementById("new-array");
+const ALGORITHM = document.getElementById("algorithm");
 
 NEW_ARRAY.addEventListener("click", newArray);
 ARRAY_SIZE.addEventListener("input", adjustArraySize);
