@@ -60,22 +60,22 @@ function newArray() {
 	}
 }
 
-const selectionSort = (array) => {
+async function selectionSort(array) {
 	for (let i = 0; i < array.length - 1; i++) {
 		let minElementIndex = i;
 
 		ARRAY_BARS.childNodes[i].style.backgroundColor = "blue";
 
 		for (let j = i + 1; j < array.length; j++) {
+			ARRAY_BARS.childNodes[j].style.backgroundColor = "red";
+
 			if (array[j] < array[minElementIndex]) {
 				minElementIndex = j;
-
-				ARRAY_BARS.childNodes[j].style.backgroundColor = "green";
-			} else {
-				ARRAY_BARS.childNodes[j].style.backgroundColor = "red";
 			}
 
-			ARRAY_BARS.childNodes[j].style.backgroundColor = "black";
+			await sleep(10);
+
+			ARRAY_BARS.childNodes[j].style.backgroundColor = "white";
 		}
 
 		let temp = array[i];
@@ -84,9 +84,13 @@ const selectionSort = (array) => {
 		array[minElementIndex] = temp;
 		ARRAY_BARS.childNodes[minElementIndex].style.height = temp.toString() + "px";
 
-		ARRAY_BARS.childNodes[i].style.backgroundColor = "black";
+		ARRAY_BARS.childNodes[i].style.backgroundColor = "white";
 	}
-};
+}
+
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function start() {
 	for (let i = 0; i < ARRAY_SIZE.value; i++) {
