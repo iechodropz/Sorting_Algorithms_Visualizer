@@ -73,7 +73,7 @@ async function selectionSort(array) {
 				minElementIndex = j;
 			}
 
-			await sleep(10);
+			await sleep(5);
 
 			ARRAY_BARS.childNodes[j].style.backgroundColor = "white";
 		}

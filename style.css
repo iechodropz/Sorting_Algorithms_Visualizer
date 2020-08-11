@@ -47,3 +47,25 @@ body {
 	letter-spacing: 2px;
 	text-transform: uppercase;
 }
+
+.array-size,
+.algorithms {
+	color: white;
+	font-size: xx-large;
+	margin: 5px;
+}
+
+.array-size-value {
+	width: 48px;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	background: lightblue;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 45px;
+	font-size: 20px;
+	font-weight: bold;
+	left: 50%;
+	transform: tranlateX(-50%);
+}
